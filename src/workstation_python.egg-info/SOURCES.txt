@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/workstation_python/__init__.py
+src/workstation_python/environment.py
+src/workstation_python.egg-info/PKG-INFO
+src/workstation_python.egg-info/SOURCES.txt
+src/workstation_python.egg-info/dependency_links.txt
+src/workstation_python.egg-info/requires.txt
+src/workstation_python.egg-info/top_level.txt
+tests/test_environment.py

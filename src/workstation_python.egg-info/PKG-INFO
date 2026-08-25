@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: workstation-python
+Version: 0.1.0
+Summary: Scientific Python workstation for data science, bioinformatics and AI research
+Requires-Python: <3.13,>=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: scikit-learn
+Requires-Dist: biopython
+Requires-Dist: jupyter
+Requires-Dist: ipykernel
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+
+# Workstation Python
+
+Ambiente Python científico executado no Ubuntu 24.04 via WSL2.
+
+## Ambiente
+
+- Python
+- NumPy
+- SciPy
+- Pandas
+- Matplotlib
+- Scikit-learn
+- Jupyter
+- Biopython
+
+## Estrutura
+
+- `src/` — código-fonte
+- `notebooks/` — notebooks Jupyter
+- `data/` — dados
+- `tests/` — testes
+- `scripts/` — scripts auxiliares
+- `docs/` — documentação
