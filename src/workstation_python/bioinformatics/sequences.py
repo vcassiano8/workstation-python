@@ -1,38 +1,37 @@
 from Bio.Seq import Seq
 
 
-def validate_dna(sequence: str) -> bool:
-    """Return True if a sequence contains only valid DNA bases."""
-    sequence = sequence.upper()
-    return bool(sequence) and all(base in "ACGT" for base in sequence)
+def dna_to_rna(sequence: str) -> str:
+    """Transcribe a DNA sequence into RNA."""
+    return str(Seq(sequence.upper()).transcribe())
 
 
-def complement_dna(sequence: str) -> str:
-    """Return the complementary DNA strand."""
-    return str(Seq(sequence).complement())
+def rna_to_protein(sequence: str) -> str:
+    """Translate an RNA sequence into a protein sequence."""
+    return str(Seq(sequence.upper()).translate(to_stop=False))
 
 
-def reverse_complement_dna(sequence: str) -> str:
+def dna_to_protein(sequence: str) -> str:
+    """Transcribe DNA into RNA and translate it into protein."""
+    return str(Seq(sequence.upper()).transcribe().translate(to_stop=False))
+
+
+def reverse_complement(sequence: str) -> str:
     """Return the reverse complement of a DNA sequence."""
-    return str(Seq(sequence).reverse_complement())
-
-
-def transcribe_dna(sequence: str) -> str:
-    """Transcribe DNA into RNA."""
-    return str(Seq(sequence).transcribe())
+    return str(Seq(sequence.upper()).reverse_complement())
 
 
 def gc_content(sequence: str) -> float:
-    """Calculate GC content as a percentage."""
+    """Calculate the GC content percentage of a DNA sequence."""
     sequence = sequence.upper()
 
-    if not validate_dna(sequence):
-        raise ValueError("Invalid DNA sequence.")
+    if not sequence:
+        raise ValueError("Sequence cannot be empty.")
 
-    gc = sequence.count("G") + sequence.count("C")
-    return (gc / len(sequence)) * 100
+    valid_bases = {"A", "T", "C", "G"}
 
+    if any(base not in valid_bases for base in sequence):
+        raise ValueError("Sequence must contain only A, T, C and G.")
 
-def translate_rna(sequence: str) -> str:
-    """Translate an RNA sequence into a protein sequence."""
-    return str(Seq(sequence).translate(to_stop=False))
+    gc_count = sequence.count("G") + sequence.count("C")
+    return (gc_count / len(sequence)) * 100

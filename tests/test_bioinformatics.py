@@ -1,33 +1,34 @@
+import pytest
+
 from workstation_python.bioinformatics.sequences import (
-    complement_dna,
+    dna_to_protein,
+    dna_to_rna,
     gc_content,
-    reverse_complement_dna,
-    transcribe_dna,
-    translate_rna,
-    validate_dna,
+    reverse_complement,
+    rna_to_protein,
 )
 
 
-def test_validate_dna():
-    assert validate_dna("ATGCGT")
-    assert not validate_dna("ATGCX")
+def test_dna_to_rna():
+    assert dna_to_rna("ATGC") == "AUGC"
 
 
-def test_complement_dna():
-    assert complement_dna("ATGC") == "TACG"
+def test_rna_to_protein():
+    assert rna_to_protein("AUGGCC") == "MA"
 
 
-def test_reverse_complement_dna():
-    assert reverse_complement_dna("ATGC") == "GCAT"
+def test_dna_to_protein():
+    assert dna_to_protein("ATGGCC") == "MA"
 
 
-def test_transcribe_dna():
-    assert transcribe_dna("ATGC") == "AUGC"
+def test_reverse_complement():
+    assert reverse_complement("ATGC") == "GCAT"
 
 
 def test_gc_content():
     assert gc_content("ATGC") == 50.0
 
 
-def test_translate_rna():
-    assert translate_rna("AUGGCCAUUGUA") == "MAIV"
+def test_gc_content_empty_sequence():
+    with pytest.raises(ValueError):
+        gc_content("")
