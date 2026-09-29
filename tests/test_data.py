@@ -45,3 +45,13 @@ def test_load_json(tmp_path):
     assert isinstance(dataframe, pd.DataFrame)
     assert list(dataframe.columns) == ["name", "value"]
     assert dataframe["value"].tolist() == [10, 20]
+
+
+def test_load_csv_with_nrows(tmp_path):
+    csv_file = tmp_path / "data.csv"
+    csv_file.write_text("name,value\nA,10\nB,20\nC,30\n")
+
+    dataframe = load_csv(csv_file, nrows=2)
+
+    assert len(dataframe) == 2
+    assert dataframe["name"].tolist() == ["A", "B"]

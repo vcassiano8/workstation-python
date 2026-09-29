@@ -16,10 +16,13 @@ def _validate_file(path: str | Path) -> Path:
     return path
 
 
-def load_csv(path: str | Path) -> pd.DataFrame:
-    """Load a CSV file into a pandas DataFrame."""
+def load_csv(path: str | Path, **kwargs) -> pd.DataFrame:
+    """Load a CSV file into a pandas DataFrame.
+
+    Additional keyword arguments are forwarded to pandas.read_csv().
+    """
     path = _validate_file(path)
-    return pd.read_csv(path)
+    return pd.read_csv(path, **kwargs)
 
 
 def load_tsv(path: str | Path) -> pd.DataFrame:
