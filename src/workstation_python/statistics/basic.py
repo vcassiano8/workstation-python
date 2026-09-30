@@ -3,6 +3,9 @@ import numpy as np
 
 def descriptive_statistics(data: np.ndarray) -> dict[str, float]:
     """Calculate basic descriptive statistics."""
+    if data.size == 0:
+        raise ValueError("Data cannot be empty.")
+
     return {
         "mean": float(np.mean(data)),
         "median": float(np.median(data)),
