@@ -10,5 +10,6 @@ def test_descriptive_statistics():
 
     assert result["mean"] == 3.0
     assert result["median"] == 3.0
+    assert np.isclose(result["std"], np.sqrt(2))
     assert result["min"] == 1.0
     assert result["max"] == 5.0
