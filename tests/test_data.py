@@ -67,3 +67,17 @@ def test_load_tsv_with_nrows(tmp_path):
 
     assert len(dataframe) == 2
     assert dataframe["name"].tolist() == ["A", "B"]
+
+
+def test_load_json_with_lines(tmp_path):
+    json_file = tmp_path / "data.jsonl"
+    json_file.write_text(
+        '{"name": "A", "value": 10}\n'
+        '{"name": "B", "value": 20}\n'
+    )
+
+    dataframe = load_json(json_file, lines=True)
+
+    assert isinstance(dataframe, pd.DataFrame)
+    assert dataframe["name"].tolist() == ["A", "B"]
+    assert dataframe["value"].tolist() == [10, 20]
