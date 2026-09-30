@@ -25,11 +25,13 @@ def load_csv(path: str | Path, **kwargs) -> pd.DataFrame:
     return pd.read_csv(path, **kwargs)
 
 
-def load_tsv(path: str | Path) -> pd.DataFrame:
-    """Load a TSV file into a pandas DataFrame."""
-    path = _validate_file(path)
-    return pd.read_csv(path, sep="\t")
+def load_tsv(path: str | Path, **kwargs) -> pd.DataFrame:
+    """Load a TSV file into a pandas DataFrame.
 
+    Additional keyword arguments are forwarded to pandas.read_csv().
+    """
+    path = _validate_file(path)
+    return pd.read_csv(path, sep="\t", **kwargs)
 
 def load_json(path: str | Path) -> pd.DataFrame:
     """Load a JSON file into a pandas DataFrame."""

@@ -38,7 +38,9 @@ def test_load_tsv(tmp_path):
 
 def test_load_json(tmp_path):
     json_file = tmp_path / "data.json"
-    json_file.write_text('[{"name": "A", "value": 10}, {"name": "B", "value": 20}]')
+    json_file.write_text(
+        '[{"name": "A", "value": 10}, {"name": "B", "value": 20}]'
+    )
 
     dataframe = load_json(json_file)
 
@@ -52,6 +54,16 @@ def test_load_csv_with_nrows(tmp_path):
     csv_file.write_text("name,value\nA,10\nB,20\nC,30\n")
 
     dataframe = load_csv(csv_file, nrows=2)
+
+    assert len(dataframe) == 2
+    assert dataframe["name"].tolist() == ["A", "B"]
+
+
+def test_load_tsv_with_nrows(tmp_path):
+    tsv_file = tmp_path / "data.tsv"
+    tsv_file.write_text("name\tvalue\nA\t10\nB\t20\nC\t30\n")
+
+    dataframe = load_tsv(tsv_file, nrows=2)
 
     assert len(dataframe) == 2
     assert dataframe["name"].tolist() == ["A", "B"]
